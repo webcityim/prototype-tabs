@@ -10,8 +10,8 @@
           respo.core :refer $ defcomp defeffect <> >> div button textarea span input
           respo.comp.space :refer $ =<
           reel.comp.reel :refer $ comp-reel
-          respo-md.comp.md :refer $ comp-md
           app.config :refer $ dev?
+          respo-ui.core :refer $ hsl
       :defs $ {}
         |comp-container $ quote
           defcomp comp-container (reel)
@@ -22,22 +22,13 @@
                 state $ either (:data states)
                   {} $ :content "\""
               div
-                {} $ :style (merge ui/global ui/row)
-                textarea $ {}
-                  :value $ :content state
-                  :placeholder "\"Content"
-                  :style $ merge ui/expand ui/textarea
-                    {} $ :height 320
-                  :on-input $ fn (e d!)
-                    d! cursor $ assoc state :content (:value e)
-                =< 8 nil
-                div
-                  {} $ :style ui/expand
-                  comp-md "|This is some content with `code`"
-                  =< |8px nil
-                  button $ {} (:style ui/button) (:inner-text "\"Run")
-                    :on-click $ fn (e d!)
-                      println $ :content state
+                {} $ :style (merge ui/global ui/fullscreen ui/row)
+                div $ {} (:style ui/expand)
+                div $ {}
+                  :style $ {}
+                    :background-color $ hsl 0 0 90
+                    :width 48
+                    :box-shadow $ str "\"-1px 0 3px " (hsl 0 0 0 0.3)
                 when dev? $ comp-reel (>> states :reel) reel ({})
     |app.schema $ {}
       :ns $ quote (ns app.schema)
