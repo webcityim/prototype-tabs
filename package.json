@@ -10,7 +10,7 @@
   "version": "0.0.1",
   "packageManager": "yarn@4.18.0",
   "scripts": {
-    "build": "calcit calcit.cirru js && vite build --base=./",
+    "build": "calcit calcit.cirru js && vite build --base=${VITE_BASE_URL:-./}",
     "watch": "calcit calcit.cirru -w"
   }
 }
